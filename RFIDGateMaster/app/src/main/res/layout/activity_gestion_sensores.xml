@@ -7,26 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".GestionSensores">
 
-    <EditText
-        android:id="@+id/edtCodigo"
-        android:layout_width="365dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:drawable/edit_text"
-        android:hint="Código UID del Sensor RFID"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
     <Spinner
         android:id="@+id/spinnerTipo"
         android:layout_width="359dp"
         android:layout_height="31dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCodigo" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEscanear" />
 
     <Spinner
         android:id="@+id/spinnerEstado"
@@ -36,6 +24,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTipo" />
+
+    <Button
+        android:id="@+id/btnEscanear"
+        android:layout_width="226dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#F840A1"
+        android:text="Escanear Tarjeta RFID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
         android:id="@+id/btnRegistrar"
@@ -61,11 +61,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegistrar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerSensores"
-        android:layout_width="345dp"
-        android:layout_height="296dp"
-        android:layout_marginTop="12dp"
+
+    <ListView
+        android:id="@+id/listaSensores"
+        android:layout_width="352dp"
+        android:layout_height="272dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />

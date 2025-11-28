@@ -1,75 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GestionUsuarios">
+    android:background="#F6F6F6"
+    android:padding="20dp"
+    android:textAlignment="center">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="120dp"
-        android:layout_height="126dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/edtNombre"
-        android:layout_width="297dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:drawable/edit_text"
-        android:hint="Nombre del usuario"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/logo" />
 
-    <EditText
-        android:id="@+id/edtEmail"
-        android:layout_width="297dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:drawable/edit_text"
-        android:hint="Correo electrónico"
-        android:inputType="textEmailAddress"
-        android:padding="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtNombre" />
+        <EditText
+            android:id="@+id/edtNombre"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="Nombre del usuario" />
 
-    <Spinner
-        android:id="@+id/spinnerEstadoUsuario"
-        android:layout_width="297dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="Correo electrónico"
+            android:inputType="textEmailAddress" />
 
-    <Button
-        android:id="@+id/btnAgregarUsuario"
-        android:layout_width="217dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#34C759"
-        android:text="Agregar Usuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerEstadoUsuario" />
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerUsuarios"
-        android:layout_width="345dp"
-        android:layout_height="296dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAgregarUsuario" />
+        <EditText
+            android:id="@+id/edtTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="Teléfono" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/edtRut"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/edit_text"
+            android:hint="RUT (12.345.678-9)" />
+
+        <Spinner
+            android:id="@+id/spinnerEstadoUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp" />
+
+        <Spinner
+            android:id="@+id/spinnerRolUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp" />
+
+        <Spinner
+            android:id="@+id/spinnerDepartamento"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/btnAgregarUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#34C759"
+            android:text="Agregar Usuario" />
+
+        <TextView
+            android:id="@+id/txtListaUsuarios"
+            android:layout_width="182dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:text="Lista de Usuarios"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/listaUsuarios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</ScrollView>

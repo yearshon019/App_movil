@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A1B6F6"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- CÓDIGO (NO EDITABLE) -->
+        <TextView
+            android:id="@+id/txtCodigoSensorEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Código:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:paddingBottom="8dp" />
+
+        <!-- DEPARTAMENTO SOLO PARA MOSTRAR -->
+        <TextView
+            android:id="@+id/txtDepartamentoSensorEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Departamento:"
+            android:textSize="16sp"
+            android:paddingBottom="16dp" />
+
+        <!-- TIPO SENSOR -->
+        <Spinner
+            android:id="@+id/spinnerTipoSensorEditar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp" />
+
+        <!-- ESTADO SENSOR -->
+        <Spinner
+            android:id="@+id/spinnerEstadoSensorEditar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp" />
+
+        <!-- BOTÓN GUARDAR -->
+        <Button
+            android:id="@+id/btnGuardarSensor"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#2ECC71"
+            android:text="Guardar Cambios" />
+
+        <!-- BOTÓN ELIMINAR -->
+        <Button
+            android:id="@+id/btnEliminarSensor"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#E74C3C"
+            android:text="Eliminar Sensor" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -11,10 +11,9 @@
         android:id="@+id/spinnerTipo"
         android:layout_width="359dp"
         android:layout_height="31dp"
-        android:layout_marginTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEscanear" />
+        tools:layout_editor_absoluteY="231dp" />
 
     <Spinner
         android:id="@+id/spinnerEstado"
@@ -24,18 +23,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTipo" />
-
-    <Button
-        android:id="@+id/btnEscanear"
-        android:layout_width="226dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#F840A1"
-        android:text="Escanear Tarjeta RFID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
         android:id="@+id/btnRegistrar"

@@ -44,8 +44,6 @@ class MainActivity : AppCompatActivity() {
         emaillogin = findViewById(R.id.emaillogin)
         passwordlogin = findViewById(R.id.passwordlogin)
         btnLogin = findViewById(R.id.btnLogin)
-        btnTarjeta = findViewById(R.id.btnTarjeta)
-
         requestQueue = Volley.newRequestQueue(this)
 
         // -----------------------------
@@ -72,13 +70,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             consultarDatos(email, password_hash)
-        }
-
-        // -----------------------------
-        // LOGIN CON TARJETA RFID
-        // -----------------------------
-        btnTarjeta.setOnClickListener {
-            ingresarConTarjeta()
         }
     }
 
@@ -127,13 +118,21 @@ class MainActivity : AppCompatActivity() {
                                 .setConfirmClickListener {
                                     it.dismissWithAnimation()
 
+                                    val idUsuario = response.getString("id_usuario")  // ← IMPORTANTE
+                                    val rol = response.getString("rol")
+
+                                    val prefs = getSharedPreferences("usuario", MODE_PRIVATE)
+                                    prefs.edit()
+                                        .putString("id_usuario", idUsuario)
+                                        .putString("rol", rol)
+                                        .apply()
+
                                     val ventana = Intent(this@MainActivity, Dashboard::class.java)
-                                    ventana.putExtra("rol", rol)
-                                    ventana.putExtra("email", email)
                                     startActivity(ventana)
                                 }
                                 .show()
                         }
+
                     }
 
                 } catch (e: JSONException) {
@@ -150,117 +149,6 @@ class MainActivity : AppCompatActivity() {
                     .setContentText("No se pudo conectar al servidor.")
                     .show()
                 error.printStackTrace()
-            }
-        )
-
-        requestQueue.add(request)
-    }
-// --------------------------------------------------------------------
-// LOGIN con tarjeta RFID → mostrando "Escaneando…"
-// --------------------------------------------------------------------
-    private fun ingresarConTarjeta() {
-
-        // 💬 Mostrar mensaje de carga
-        val dialogo = SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-        dialogo.titleText = "Escaneando tarjeta…"
-        dialogo.contentText = "Acerque su tarjeta RFID al lector"
-        dialogo.setCancelable(false)
-        dialogo.show()
-
-        val url = "$BASE/leer_uid.php"
-
-        val peticion = StringRequest(
-            Request.Method.GET, url,
-            { uid ->
-
-                dialogo.dismiss() // Cerrar ventana de "escaneando"
-
-                if (uid.isBlank()) {
-                    SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("Sin lectura")
-                        .setContentText("No se detectó ninguna tarjeta RFID.")
-                        .show()
-                } else {
-                    loginPorTarjeta(uid)
-                }
-
-            },
-            {
-                dialogo.dismiss()
-
-                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Error")
-                    .setContentText("No se pudo conectar al lector RFID.")
-                    .show()
-            }
-        )
-
-        requestQueue.add(peticion)
-    }
-
-
-    // --------------------------------------------------------------------
-    // LOGIN con TARJETA → login_tarjeta.php
-    // --------------------------------------------------------------------
-    private fun loginPorTarjeta(uid: String) {
-
-        val url = "$BASE/login_tarjeta.php?codigo_sensor=$uid"
-
-        val request = JsonObjectRequest(
-            Request.Method.GET, url, null,
-            { response ->
-
-                val ok = response.getBoolean("ok")
-
-                if (!ok) {
-                    SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                        .setTitleText("Tarjeta no válida")
-                        .setContentText("Esta tarjeta no está registrada.")
-                        .show()
-                    return@JsonObjectRequest
-                }
-
-                val estado = response.getString("estado")
-                val rol = response.getString("rol")
-                val email = response.getString("email")
-
-                when (estado) {
-
-                    "BLOQUEADO" -> {
-                        SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Usuario Bloqueado")
-                            .setContentText("Tu cuenta está bloqueada.")
-                            .show()
-                    }
-
-                    "INACTIVO" -> {
-                        SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText("Usuario Inactivo")
-                            .setContentText("Tu cuenta está inactiva.")
-                            .show()
-                    }
-
-                    "ACTIVO" -> {
-                        SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                            .setTitleText("Acceso con Tarjeta")
-                            .setContentText("Bienvenido. Rol detectado: $rol")
-                            .setConfirmClickListener {
-                                it.dismissWithAnimation()
-
-                                val ventana = Intent(this@MainActivity, Dashboard::class.java)
-                                ventana.putExtra("rol", rol)
-                                ventana.putExtra("email", email)
-                                startActivity(ventana)
-                            }
-                            .show()
-                    }
-                }
-            },
-            {
-                SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Error de conexión")
-                    .setContentText("No se pudo consultar el servidor.")
-                    .show()
             }
         )
 

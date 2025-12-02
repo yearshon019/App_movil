@@ -2,16 +2,50 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F4F4F4">
 
-    <TextView
-        android:id="@+id/txtHistorial"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:padding="12dp"
-        android:text="Historial:"
-        />
+        android:orientation="vertical">
 
+        <!-- TÍTULO BONITO -->
+        <TextView
+            android:id="@+id/txtTituloHist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📜 Historial de Accesos"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:paddingBottom="10dp" />
+
+        <!-- CONTENEDOR CON FONDO REDONDEADO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            android:elevation="4dp"
+            android:clipToOutline="true"
+            android:paddingBottom="20dp"
+            android:shape="rectangle"
+            android:layoutDirection="ltr">
+
+            <TextView
+                android:id="@+id/txtHistorial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#444444"
+                android:lineSpacingExtra="6dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </ScrollView>

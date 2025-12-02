@@ -22,49 +22,42 @@ class Dashboard : AppCompatActivity() {
             insets
         }
 
-        // 🔥 Recibimos el rol enviado desde el login
-        val rol = intent.getStringExtra("rol") ?: "OPERADOR"
+        // ✔ CORRECTO: Obtener rol desde SharedPreferences
+        val prefs = getSharedPreferences("usuario", MODE_PRIVATE)
+        val rol = prefs.getString("rol", "OPERADOR") ?: "OPERADOR"
 
-        // Botones del dashboard
+        // Botones
         val btnGestionUsuarios = findViewById<Button>(R.id.btnUsuarios)
         val btnGestionSensores = findViewById<Button>(R.id.btnSensores)
         val btnHistorial = findViewById<Button>(R.id.btnHistorial)
         val btnControlBarrera = findViewById<Button>(R.id.btnBarrera)
         val btnPerfil = findViewById<Button>(R.id.btnPerfil)
 
-        // 🔐 Si el rol es OPERADOR → ocultar botones restringidos
+        // 🔐 Si es operador → ocultar acceso admin
         if (rol == "OPERADOR") {
             btnGestionUsuarios.visibility = View.GONE
             btnGestionSensores.visibility = View.GONE
         }
 
-        // Navegación normal
+        // Navegación
         btnGestionUsuarios.setOnClickListener {
-            val intent = Intent(this, GestionUsuarios::class.java)
-            intent.putExtra("rol", rol)
-            startActivity(intent)
+            startActivity(Intent(this, GestionUsuarios::class.java))
         }
 
         btnGestionSensores.setOnClickListener {
-            val intent = Intent(this, GestionSensores::class.java)
-            intent.putExtra("rol", rol)
-            startActivity(intent)
+            startActivity(Intent(this, GestionSensores::class.java))
         }
 
         btnHistorial.setOnClickListener {
-            val intent = Intent(this, Historial::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, Historial::class.java))
         }
 
         btnControlBarrera.setOnClickListener {
-            val intent = Intent(this, ControlBarrera::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, ControlBarrera::class.java))
         }
 
         btnPerfil.setOnClickListener {
             val intent = Intent(this, Perfil::class.java)
-            intent.putExtra("rol", rol)
-            intent.putExtra("email", getIntent().getStringExtra("email"))
             startActivity(intent)
         }
     }
